@@ -1,2 +1,4 @@
 # plasmian-script
-The script (roughly) used to make Plasmian, along with some details
+The script used to build the Plasmian images
+See setup instructions given in the script
+License: MIT
