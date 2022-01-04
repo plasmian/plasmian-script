@@ -10,13 +10,17 @@
 # sudo remaster-squashfs-editor
 # Select (C)hroot.
 # Download the plasmian-build script in the chroot using curl and run it.
-# Everything after this is automated unless something goes wrong.
+# Everything after choosing free or non-free (input 1 or 2 there) is automated unless something goes wrong.
 
 blame_internet (){
   if [ $? != 0 ]; then
     echo "Something went wrong. probably internet lost"
     exit 1
+  fi
 }
+
+echo "Free (1) or non-free (2)?"
+read $freeornonfree
 
 #Wine setup
 dpkg --add-architecture i386
@@ -25,8 +29,22 @@ blame_internet
 apt-key add winehq.key
 rm winehq.key
 
+#Lutris key
+wget -q https://download.opensuse.org/repositories/home:/strycore/Debian_11/Release.key -O- | sudo apt-key add -
+blame_internet
+
 #Repo modification
-printf "deb http://deb.debian.org/debian testing main contrib non-free\ndeb-src http://deb.debian.org/debian testing main contrib\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main" > /etc/apt/sources.list
+if [ $freeornonfree = 1 ]; then
+  printf "deb http://deb.debian.org/debian testing main contrib non-free\ndeb-src http://deb.debian.org/debian testing main contrib\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main\ndeb http://download.opensuse.org/repositories/home:/strycore/Debian_11/ ./" > /etc/apt/sources.list
+elif [ $freeornonfree = 2 ]; then
+  printf "deb http://deb.debian.org/debian testing main\ndeb-src http://deb.debian.org/debian testing main\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main\ndeb http://download.opensuse.org/repositories/home:/strycore/Debian_11/ ./" > /etc/apt/sources.list
+  apt update
+  blame_internet
+  apt install -y vrms
+  blame_internet
+  apt purge $(vrms -s)
+  echo "System purification has been achieved and vRMS is pacified."
+fi
 apt update
 blame_internet
 apt upgrade -y
@@ -34,7 +52,7 @@ blame_internet
 
 #Bloat removal and package installing
 apt autoremove -y #TODO: fill <----------------------
-apt install -y bash-completion flatpak neofetch vlc kolourpaint#TODO: fill <-------------------------------
+apt install -y bash-completion flatpak neofetch vlc kolourpaint grub-theme-breeze breeze-gtk-theme sddm-theme-breze plymouth-theme-breeze winetricks wine-binfmt lutris#TODO: fill <-------------------------------
 blame_internet
 
 #Flatpak setup
