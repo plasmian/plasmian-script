@@ -19,7 +19,7 @@ blame_internet (){
   fi
 }
 
-echo "Free (1) or non-free (2)?"
+echo "Free (1), non-free (2), or nVidia (3)?"
 read $freeornonfree
 
 #Wine setup
@@ -34,15 +34,23 @@ wget -q https://download.opensuse.org/repositories/home:/strycore/Debian_11/Rele
 blame_internet
 
 #Repo modification
-if [ $freeornonfree = 1 ]; then
+if [ $freeornonfree = 2 ]; then
   printf "deb http://deb.debian.org/debian testing main contrib non-free\ndeb-src http://deb.debian.org/debian testing main contrib\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main\ndeb http://download.opensuse.org/repositories/home:/strycore/Debian_11/ ./" > /etc/apt/sources.list
-elif [ $freeornonfree = 2 ]; then
+elif [ $freeornonfree = 3 ]; then
+  printf "deb http://deb.debian.org/debian testing main contrib non-free\ndeb-src http://deb.debian.org/debian testing main contrib\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main\ndeb http://download.opensuse.org/repositories/home:/strycore/Debian_11/ ./" > /etc/apt/sources.list
+  apt update
+  blame_internet
+  apt install -y linux-headers-amd64
+  blame_internet
+  apt install -y nvidia-driver firmware-misc-nonfree nvidia-legacy-390xx-driver
+  blame_internet
+elif [ $freeornonfree = 1 ]; then
   printf "deb http://deb.debian.org/debian testing main\ndeb-src http://deb.debian.org/debian testing main\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main\ndeb http://download.opensuse.org/repositories/home:/strycore/Debian_11/ ./" > /etc/apt/sources.list
   apt update
   blame_internet
   apt install -y vrms
   blame_internet
-  apt purge $(vrms -s)
+  apt purge -y $(vrms -s)
   echo "System purification has been achieved and vRMS is pacified."
 fi
 apt update
@@ -51,14 +59,15 @@ apt upgrade -y
 blame_internet
 
 #Bloat removal and package installing
-apt autoremove -y #TODO: fill <----------------------
-apt install -y bash-completion flatpak neofetch vlc kolourpaint grub-theme-breeze breeze-gtk-theme sddm-theme-breze plymouth-theme-breeze winetricks wine-binfmt lutris#TODO: fill <-------------------------------
+apt autoremove -y goldendict dragonplayer juk k3b firefox-esr konqueror chromium epiphany-browser libreoffice* anthy fcitx* mozc-utils-gui apper mlterm mlterm-tiny xiterm+thai xterm ksysguard kmail kate
+blame_internet
+apt install -y bash-completion flatpak neofetch vlc elisa kolourpaint grub-theme-breeze breeze-gtk-theme sddm-theme-breze plymouth-theme-breeze winetricks wine-binfmt lutris plasma-discover-plugin-flatpak plasma-systemmonitor
 blame_internet
 
 #Flatpak setup
 flatpak remote-add flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-flatpak install -y --noninteractive org.mozilla.firefox org.onlyoffice.desktopeditors com.usebottles.bottles
+flatpak install -y --noninteractive org.mozilla.firefox org.onlyoffice.desktopeditors com.usebottles.bottles thunderbird flatseal
 blame_internet
 
 #Install smxi
