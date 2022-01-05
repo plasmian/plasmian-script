@@ -30,13 +30,15 @@ apt-key add winehq.key
 rm winehq.key
 
 #Lutris key
-wget -q https://download.opensuse.org/repositories/home:/strycore/Debian_11/Release.key -O- | sudo apt-key add -
+curl https://download.opensuse.org/repositories/home:/strycore/Debian_11/Release.key | sudo apt-key add -
 blame_internet
 
 #Repo modification
-if [ $freeornonfree = 2 ]; then
+if [ $freeornonfree = 2 ]
+then
   printf "deb http://deb.debian.org/debian testing main contrib non-free\ndeb-src http://deb.debian.org/debian testing main contrib\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main\ndeb http://download.opensuse.org/repositories/home:/strycore/Debian_11/ ./" > /etc/apt/sources.list
-elif [ $freeornonfree = 3 ]; then
+elif [ $freeornonfree = 3 ]
+then
   printf "deb http://deb.debian.org/debian testing main contrib non-free\ndeb-src http://deb.debian.org/debian testing main contrib\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main\ndeb http://download.opensuse.org/repositories/home:/strycore/Debian_11/ ./" > /etc/apt/sources.list
   apt update
   blame_internet
@@ -44,7 +46,8 @@ elif [ $freeornonfree = 3 ]; then
   blame_internet
   apt install -y nvidia-driver firmware-misc-nonfree nvidia-legacy-390xx-driver
   blame_internet
-elif [ $freeornonfree = 1 ]; then
+elif [ $freeornonfree = 1 ]
+then
   printf "deb http://deb.debian.org/debian testing main\ndeb-src http://deb.debian.org/debian testing main\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main\ndeb http://download.opensuse.org/repositories/home:/strycore/Debian_11/ ./" > /etc/apt/sources.list
   apt update
   blame_internet
