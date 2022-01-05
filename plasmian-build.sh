@@ -62,7 +62,7 @@ apt upgrade -y
 blame_internet
 
 #Bloat removal and package installing
-apt autoremove -y goldendict dragonplayer juk k3b firefox-esr konqueror chromium epiphany-browser libreoffice* anthy fcitx* mozc-utils-gui apper mlterm mlterm-tiny xiterm+thai xterm ksysguard kmail kate
+apt autoremove -y goldendict dragonplayer juk k3b firefox-esr chromium epiphany-browser libreoffice* anthy fcitx* mozc-utils-gui apper mlterm mlterm-tiny xiterm+thai xterm ksysguard kmail kate
 blame_internet
 apt install -y bash-completion flatpak neofetch vlc elisa kolourpaint grub-theme-breeze breeze-gtk-theme sddm-theme-breze plymouth-theme-breeze winetricks wine-binfmt lutris plasma-discover-plugin-flatpak plasma-systemmonitor
 blame_internet
