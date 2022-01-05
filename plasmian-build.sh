@@ -71,7 +71,7 @@ blame_internet
 #Flatpak setup
 flatpak remote-add flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-flatpak install -y --noninteractive org.mozilla.firefox org.onlyoffice.desktopeditors com.usebottles.bottles thunderbird flatseal
+flatpak install -y --noninteractive org.mozilla.firefox org.onlyoffice.desktopeditors com.usebottles.bottles org.mozilla.Thunderbird com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool
 blame_internet
 
 #Install smxi
