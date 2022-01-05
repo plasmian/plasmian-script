@@ -88,3 +88,5 @@ mkdir -p /etc/skel/.local/share/applications
 #Install templates
 mkdir -p /etc/skel/Templates/
 cp /tmp/New* /etc/skel/Templates/
+
+#Breeze everywhere
