@@ -60,7 +60,9 @@ then
 fi
 
 #Bloat removal and package installing
-apt autoremove -y goldendict dragonplayer juk k3b firefox-esr chromium epiphany-browser libreoffice* anthy fcitx* mozc-utils-gui apper mlterm mlterm-tiny xiterm+thai xterm ksysguard kmail kate
+apt install -y task-kde-desktop
+apt autoremove goldendict dragonplayer juk k3b firefox-esr chromium epiphany-browser libreoffice* anthy fcitx* mozc-utils-gui kasumi apper mlterm mlterm-tiny xiterm+thai xterm ksysguard kmail kate
+# if that desn't work (doesn't seem very reliable?) remove packages individually...
 apt upgrade -y
 blame_internet
 apt install -y bash-completion flatpak neofetch vlc elisa kolourpaint grub-theme-breeze breeze-gtk-theme sddm-theme-breze plymouth-theme-breeze winetricks wine-binfmt lutris plasma-discover-plugin-flatpak plasma-systemmonitor
@@ -92,3 +94,9 @@ mkdir -p /etc/skel/Templates/
 cp /tmp/New* /etc/skel/Templates/
 
 #Breeze everywhere
+update-alternatives sddm-debian-theme /usr/share/sddm/themes/breeze
+plymouth-set-default-theme breeze
+echo "GRUB_THEME=\"/usr/share/grub/themes/breeze/theme.txt\"" > /etc/default/grub
+update-grub
+
+
