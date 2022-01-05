@@ -20,7 +20,7 @@ blame_internet (){
 }
 
 echo "Free (1), non-free (2), or nVidia (3)?"
-read $freeornonfree
+read $free
 
 #Wine setup
 dpkg --add-architecture i386
@@ -34,10 +34,12 @@ curl https://download.opensuse.org/repositories/home:/strycore/Debian_11/Release
 blame_internet
 
 #Repo modification
-if [ $freeornonfree = 2 ]
+if [[ "$free" = "2" ]]
 then
   printf "deb http://deb.debian.org/debian testing main contrib non-free\ndeb-src http://deb.debian.org/debian testing main contrib\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main\ndeb http://download.opensuse.org/repositories/home:/strycore/Debian_11/ ./" > /etc/apt/sources.list
-elif [ $freeornonfree = 3 ]
+  apt update
+  blame_internet
+elif [ "$free" = "3" ]
 then
   printf "deb http://deb.debian.org/debian testing main contrib non-free\ndeb-src http://deb.debian.org/debian testing main contrib\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main\ndeb http://download.opensuse.org/repositories/home:/strycore/Debian_11/ ./" > /etc/apt/sources.list
   apt update
@@ -46,7 +48,7 @@ then
   blame_internet
   apt install -y nvidia-driver firmware-misc-nonfree nvidia-legacy-390xx-driver
   blame_internet
-elif [ $freeornonfree = 1 ]
+elif [ "$free" = "1" ]
 then
   printf "deb http://deb.debian.org/debian testing main\ndeb-src http://deb.debian.org/debian testing main\ndeb https://dl.winehq.org/wine-builds/debian/ bookworm main\ndeb http://download.opensuse.org/repositories/home:/strycore/Debian_11/ ./" > /etc/apt/sources.list
   apt update
@@ -56,8 +58,6 @@ then
   apt purge -y $(vrms -s)
   echo "System purification has been achieved and vRMS is pacified."
 fi
-apt update
-blame_internet
 apt upgrade -y
 blame_internet
 
