@@ -24,7 +24,7 @@ read $freeornonfree
 
 #Wine setup
 dpkg --add-architecture i386
-curl https://dl.winehq.org/wine-builds/winehq.key
+curl https://dl.winehq.org/wine-builds/winehq.key > winehq.key
 blame_internet
 apt-key add winehq.key
 rm winehq.key
