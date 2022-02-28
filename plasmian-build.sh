@@ -65,8 +65,11 @@ apt autoremove goldendict dragonplayer juk k3b firefox-esr chromium epiphany-bro
 # if that desn't work (doesn't seem very reliable?) remove packages individually...
 apt upgrade -y
 blame_internet
-apt install -y bash-completion flatpak neofetch vlc elisa kolourpaint grub-theme-breeze breeze-gtk-theme sddm-theme-breeze plymouth-theme-breeze winetricks wine-binfmt lutris plasma-discover-backend-flatpak plasma-systemmonitor
+apt install -y bash-completion flatpak neofetch vlc elisa kolourpaint command-not-found grub-theme-breeze breeze-gtk-theme sddm-theme-breeze plymouth-theme-breeze winetricks wine-binfmt lutris plasma-discover-backend-flatpak plasma-systemmonitor
 blame_internet
+apt-file update
+blame_internet
+update-command-not-found
 
 #Flatpak setup
 flatpak remote-add flathub https://flathub.org/repo/flathub.flatpakrepo
