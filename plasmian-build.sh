@@ -96,4 +96,6 @@ plymouth-set-default-theme breeze
 echo "GRUB_THEME=\"/usr/share/grub/themes/breeze/theme.txt\"" > /etc/default/grub
 update-grub
 
-
+#tweaks
+kwriteconfig5 --file kdeglobals --group "KDE" --key 'SingleClick' 'false'
+kwriteconfig5 --file plasma-org.kde.plasma.desktop-appletsrc --group "Containments" --group "1" --group "General" --key 'arrangement' 1
