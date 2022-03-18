@@ -24,9 +24,8 @@ read $free
 
 #Wine setup
 dpkg --add-architecture i386
-curl https://dl.winehq.org/wine-builds/winehq.key > winehq.key
+curl https://dl.winehq.org/wine-builds/winehq.key > /etc/apt/trusted.gpg.d/winehq.asc
 blame_internet
-apt-key add winehq.key
 rm winehq.key
 
 #Lutris key
@@ -77,11 +76,6 @@ flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatp
 flatpak install -y --noninteractive org.mozilla.firefox org.onlyoffice.desktopeditors com.usebottles.bottles org.mozilla.Thunderbird com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool
 blame_internet
 
-#Install smxi
-curl -L  https://github.com/smxi/smxi/archive/master.zip -o /tmp/smxi.zip
-blame_internet
-unzip /tmp/smxi.zip -d /usr/local/bin/
-
 #Download plasmian-files
 curl -L https://github.com/plasmian/plasmian-files/archive/refs/heads/main.zip -o /tmp/
 blame_internet
@@ -91,7 +85,7 @@ mkdir -p /etc/skel/.var/app/org.mozilla.firefox/config/fontconfig/
 cp /tmp/plasmian-files/fonts.conf /etc/skel/.var/app/org.mozilla.firefox/config/fontconfig/
 #Install custom app names
 mkdir -p /etc/skel/.local/share/applications
-#TODO: make desktop files, add to plasmian-files repo, copy them over to here <-------------------------------
+cp /tmp/files/* /etc/skel/.local/share/applications
 #Install templates
 mkdir -p /etc/skel/Templates/
 cp /tmp/New* /etc/skel/Templates/
